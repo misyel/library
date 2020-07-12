@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <title>my library</title>
+    </head>
+    <body>
+        <h1>my library</h1>
+        <button id="newBook">+ add new book</button>
+        <div id="form">
+            <div id="form-content">
+                <ul>
+                    <li><label for="title">title</label>
+                         <input id="title" type="text" name="title"></li>
+                    <li><label for="author">author</label>
+                        <input id="author" type="text" name="author"></li>
+                    <li><label for="pages"># of pages</label> 
+                        <input id="pages" type="text" name="pages"></li>
+                    <li><label for="read">read</label>
+                        <input id="read" type="checkbox" name="read"></li>
+                    <li><button id="submit">submit</button><button id="cancel">cancel</button></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="table">
+            <table style="width:50%">
+                <tr>
+                    <th class="table-header">Title</th>
+                    <th class="table-header">Author</th>
+                    <th class="table-header">Pages</th>
+                    <th class="table-header">Read/Not Read</th>
+                </tr>
+            </table>
+        </div>
+        <script type="text/javascript" src="library.js"></script>
+    </body>
+</html>
