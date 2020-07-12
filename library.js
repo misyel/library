@@ -1,4 +1,4 @@
-let myLibrary = [new Book('a time to kill','john grisham','192', 'x')];
+let myLibrary = [new Book('a time to kill','john grisham','192', 'on')];
 var form = document.getElementById("form");
 var addBook = document.getElementById("newBook");
 var submit = document.getElementById("submit");
@@ -26,13 +26,13 @@ addBook.addEventListener("click", function(){
 
 //close form on click
 cancel.addEventListener("click", function(){
-    console.log("close")
+    //console.log("close")
     form.style.display="none";
 })
 
 //submit form 
 submit.addEventListener("click", function(){
-    console.log('submit');
+    //console.log('submit');
     const formContent = document.getElementsByTagName("form");
     const inputs = document.querySelectorAll('input');
     //console.log(inputs)
@@ -41,16 +41,15 @@ submit.addEventListener("click", function(){
     const pages = inputs[2];
     const read = inputs[3]; 
 
-    //console.log(title.value);
-
     //check for empty inputs
     if(title.value == "" || author.value == "" || pages == ""){
         console.log('empty');
         alert('please fill out all fields');
     }
-
-    form.style.display="none"
-    addBookToLibrary(inputs);
+    else{
+        form.style.display="none"
+        addBookToLibrary(inputs);
+    }
 })
 
 //add new book to library
@@ -66,20 +65,28 @@ function addBookToLibrary(inputs){
 
 //display library
 function render(){
-    for(i=0;i<myLibrary.length;i++){
-        console.log(myLibrary[i]);
-        table.innerHTML += `<tr><th>${myLibrary[i].title}</th> <th>${myLibrary[i].author}</th><th>${myLibrary[i].pages}</th><th><input type="checkbox"${myLibrary[i].read}></th><th><button class="delete">delete</button></th></tr>`
-        console.log(table.lastChild.lastChild.lastChild);
+    //console.log(myLibrary[i]);
+    const index = myLibrary.length-1
+    const del = '<button class="delete">delete</button>'
+    if(myLibrary[index].read == "on"){
+        table.innerHTML += `<tr><th>${myLibrary[index].title}</th> <th>${myLibrary[index].author}</th><th>${myLibrary[index].pages}</th><th><input type="checkbox" checked></th><th>${del}</th></tr>`
+    }
+    else{
+        table.innerHTML += `<tr><th>${myLibrary[index].title}</th> <th>${myLibrary[index].author}</th><th>${myLibrary[index].pages}</th><th><input type="checkbox"></th><th>${del}</th></tr>`
+    }
+    dels(); //update delete buttons
+}
 
-        //check for deletes
-        const row = table.lastChild.lastChild;
-        row.lastChild.firstChild.addEventListener('click', function(){
+//add event listeners to delete buttons
+function dels(){
+    const delButtons = document.querySelectorAll('.delete');
+    for(i=0;i<delButtons.length;i++){
+        delButtons[i].addEventListener('click', function(){
             var r = this.parentNode.parentNode.rowIndex;
             console.log(r);
             table.deleteRow(r);
+            myLibrary.splice(i);
+            console.log(myLibrary);
         })
     }
 }
-
-//addBookToLibrary();
-//console.log(myLibrary);
